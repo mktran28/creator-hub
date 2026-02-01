@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { supabase } from "../client"
 import Header from '../components/Header.jsx'
@@ -11,6 +11,7 @@ export default function AddCreator() {
     const [imageURL, setImageURL] = useState("");
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
+    const contentRef = useRef(null);
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -30,12 +31,21 @@ export default function AddCreator() {
         setLoading(false)
         navigate("/")
     }
+
+    useEffect(() => {
+        if (!loading && contentRef.current) {
+            contentRef.current.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            })
+        }
+    }, [loading])
     
     return (
         <div>
             <Header/>
 
-            <div className = "bg-light-blue min-h-screen flex justify-center items-center p-5">
+            <div ref = {contentRef} className = "bg-light-blue min-h-screen flex justify-center items-center p-5">
                 <div className = "w-full max-w-lg space-y-5">
                     <h1 className = "text-3xl text-dark-blue font-bold text-center">Add a Creator</h1>
 

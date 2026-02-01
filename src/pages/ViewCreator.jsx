@@ -1,6 +1,6 @@
 import { useParams, Link } from 'react-router-dom'
 import { supabase } from '../client'
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Header from '../components/Header';
 
 export default function ViewCreator() {
@@ -11,6 +11,7 @@ export default function ViewCreator() {
     const [imageURL, setImageURL] = useState("");
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(true);
+    const contentRef = useRef(null);
 
     useEffect(() => {
         async function fetchCreator() {
@@ -35,6 +36,15 @@ export default function ViewCreator() {
         fetchCreator();
     }, [id]);
 
+    useEffect(() => {
+        if (!loading && contentRef.current) {
+            contentRef.current.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            })
+        }
+    }, [loading])
+
     if (loading) {
         return <div>Loading...</div>
     }
@@ -47,7 +57,7 @@ export default function ViewCreator() {
         <div>
             <Header />
 
-            <div className = "bg-light-blue min-h-screen flex justify-center items-center p-5">
+            <div ref = {contentRef} className = "bg-light-blue min-h-screen flex justify-center items-center p-5">
                 <div className = "w-full max-w-xl space-y-5 bg-white rounded-xl p-5">
                     <h1 className = "text-3xl text-dark-blue font-bold text-center">{name}</h1>
 

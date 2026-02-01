@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { supabase } from "../client"
 import { useNavigate, useParams } from "react-router-dom"
 import Header from "../components/Header";
@@ -13,6 +13,7 @@ export default function EditCreator() {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
+    const contentRef = useRef(null);
 
     useEffect(() => {
         async function fetchCreator() {
@@ -36,6 +37,15 @@ export default function EditCreator() {
 
         fetchCreator();
     }, [id])
+
+    useEffect(() => {
+        if (!loading && contentRef.current) {
+            contentRef.current.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            })
+        }
+    }, [loading])
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -91,7 +101,7 @@ export default function EditCreator() {
         <div>
             <Header />
 
-            <div className = "bg-light-blue min-h-screen flex justify-center items-center p-5">
+            <div ref = {contentRef} className = "bg-light-blue min-h-screen flex justify-center items-center p-5">
                 <div className = "w-full max-w-lg space-y-5">
                     <h1 className = "text-3xl text-dark-blue font-bold text-center">Edit Creator</h1>
 

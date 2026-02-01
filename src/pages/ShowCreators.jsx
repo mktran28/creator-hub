@@ -1,5 +1,5 @@
 import { supabase } from '../client.js'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import CreatorCard from '../components/CreatorCard.jsx'
 import Header from '../components/Header.jsx'
 
@@ -7,6 +7,7 @@ export default function ShowCreators() {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(true);
     const [creators, setCreators] = useState([]);
+    const contentRef = useRef(null);
 
     useEffect(() => {
         async function fetchCreators() {
@@ -26,6 +27,15 @@ export default function ShowCreators() {
         fetchCreators();
     }, [])
 
+    useEffect(() => {
+        if (!loading && contentRef.current) {
+            contentRef.current.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            })
+        }
+    }, [loading])
+
     if (loading) {
         return <div>Loading...</div>
     }
@@ -38,7 +48,7 @@ export default function ShowCreators() {
         <div>
             <Header />
 
-            <div className = "min-h-screen bg-light-blue p-5 space-y-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 items-start justify-items-center">
+            <div ref = {contentRef} className = "min-h-screen bg-light-blue p-5 space-y-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 items-start justify-items-center">
                 {creators.length === 0 ? (
                     <div>No creators yet</div>
                 ) : (
