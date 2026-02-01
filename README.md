@@ -1,5 +1,5 @@
-# WEB103 Prework - Creator Directory
-Submitted by: Mai Khanh Tran
+# WEB103 Prework - Creator Hub
+Submitted by: mktran28
 
 About this web app: A full-stack CRUD app built with React and Supabase for managing content creator profiles, featuring dynamic routing, database persistence, and responsive UI components.
 
@@ -27,11 +27,11 @@ The following **optional** features are implemented:
 
 Here's a walkthrough of implemented required features:
 
-👉🏿<img src = 'https://drive.google.com/file/d/1x3NwugfCLKoCKutQtE7mfvk1AO9gZWwi/view?usp=sharing' title = 'Video Walkthrough' width = '' alt = 'Video Walkthrough' />
+<img src="https://drive.google.com/uc?export=view&id=1x3NwugfCLKoCKutQtE7mfvk1AO9gZWwi" title="Video Walkthrough" alt="Video Walkthrough" width="600"/>
 
 ## License
 
-Copyright [2026] [Mai Khanh Tran]
+Copyright [2026] [mktran28]
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 
