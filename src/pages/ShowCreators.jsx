@@ -1,7 +1,7 @@
 import { supabase } from '../client.js'
 import { useState, useEffect } from 'react';
 import CreatorCard from '../components/CreatorCard.jsx'
-import { Link } from 'react-router-dom';
+import Header from '../components/Header.jsx'
 
 export default function ShowCreators() {
     const [error, setError] = useState("");
@@ -36,17 +36,17 @@ export default function ShowCreators() {
 
     return (
         <div>
-            <Link to = "/creators/new">Add a creator</Link>
+            <Header />
 
-            <h1>Creators</h1>
-
-            {creators.length === 0 ? (
-                <div>No creators yet</div>
-            ) : (
-                creators.map((creator) => (
-                    <CreatorCard creator = {creator} key = {creator.id}/>
-                ))
-            )}
+            <div className = "min-h-screen bg-light-blue p-5 space-y-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 items-start justify-items-center">
+                {creators.length === 0 ? (
+                    <div>No creators yet</div>
+                ) : (
+                    creators.map((creator) => (
+                        <CreatorCard creator = {creator} key = {creator.id}/>
+                    ))
+                )}
+            </div>
         </div>
     )
 }

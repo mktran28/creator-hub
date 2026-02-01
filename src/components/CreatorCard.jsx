@@ -8,22 +8,28 @@ export default function CreatorCard({creator}) {
     }
 
     return (
-        <article className = "w-full max-w-xl mx-auto">
+        <article className = "w-full max-w-sm mx-auto rounded-xl p-5 shadow-2xl space-y-5 bg-white">
             {imageURL && 
                 <img src = {imageURL} alt = {`Photo of ${name}`}/>
             }
 
-            <Link to = {`/creators/${id}/edit`}>Edit</Link>
+            <Link to = {`/creators/${id}`} className = "text-xl font-bold hover:underline inline-block">{name}</Link>
 
-            <div>
-                <h2>{name}</h2>
-
+            <div className = "flex gap-5 text-white">
                 {url && (
-                    <a href = {url} target = "_blank" rel = "noreferrer">Visit channel</a>
+                    <a 
+                        href = {url} 
+                        target = "_blank" 
+                        rel = "noreferrer" 
+                        className = "bg-medium-blue rounded-xl px-3 py-1"
+                    >
+                        Visit channel
+                    </a>
                 )}
-
-                <p>{description}</p>
+                <Link to = {`/creators/${id}/edit`} className = "bg-medium-blue rounded-xl px-3 py-1">Edit</Link>
             </div>
+
+            <p>{description}</p>
         </article>
     )
 }
