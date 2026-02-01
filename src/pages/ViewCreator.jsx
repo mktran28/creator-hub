@@ -1,12 +1,14 @@
 import { useParams, Link } from 'react-router-dom'
 import { supabase } from '../client'
 import { useEffect, useState } from 'react';
-import CreatorCard from '../components/CreatorCard';
+import Header from '../components/Header';
 
 export default function ViewCreator() {
     const {id} = useParams();
-
-    const [creator, setCreator] = useState(null);
+    const [name, setName] = useState("");
+    const [url, setUrl] = useState("");
+    const [description, setDescription] = useState("");
+    const [imageURL, setImageURL] = useState("");
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(true);
 
@@ -21,7 +23,10 @@ export default function ViewCreator() {
             if (error) {
                 setError(error.message);
             } else {
-                setCreator(data);
+                setName(data.name);
+                setUrl(data.url);
+                setDescription(data.description);
+                setImageURL(data.imageURL || "");
             }
 
             setLoading(false);
@@ -38,18 +43,42 @@ export default function ViewCreator() {
         return <div>Error: {error}</div>
     }
 
-    if (!creator) {
-        return <div>Creator not found.</div>
-    }
-
     return (
         <div>
-            <Link to = "/">Back to all creators</Link>
+            <Header />
 
-            <Link to = {`/creators/${id}/edit`}>Edit</Link>
+            <div className = "bg-light-blue min-h-screen flex justify-center items-center p-5">
+                <div className = "w-full max-w-xl space-y-5 bg-white rounded-xl p-5">
+                    <h1 className = "text-3xl text-dark-blue font-bold text-center">{name}</h1>
 
-            <div>
-                <CreatorCard creator = {creator} />
+                    <img 
+                        className = "max-w h-full"
+                        src = {imageURL} 
+                        alt = {`Photo of ${name}`}
+                    />
+
+                    <div className = "flex gap-5 text-white justify-center">
+                        {url && (
+                            <a 
+                                href = {url} 
+                                target = "_blank" 
+                                rel = "noreferrer" 
+                                className = "bg-medium-blue rounded-xl px-3 py-1"
+                            >
+                                Visit channel
+                            </a>
+                        )}
+
+                        <Link 
+                            to = {`/creators/${id}/edit`} 
+                            className = "bg-medium-blue rounded-xl px-3 py-1"
+                        >
+                            Edit
+                        </Link>
+                    </div>
+
+                    <div>{description}</div>
+                </div>
             </div>
         </div>
     );

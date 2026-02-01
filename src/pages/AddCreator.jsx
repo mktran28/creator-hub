@@ -35,14 +35,14 @@ export default function AddCreator() {
         <div>
             <Header/>
 
-            <div className = "bg-light-blue min-h-screen flex justify-center p-5">
-                <div className = "w-full max-w-lg flex flex-col items-center space-y-5">
-                    <h1 className = "text-3xl text-dark-blue font-bold">Add a Creator</h1>
+            <div className = "bg-light-blue min-h-screen flex justify-center items-center p-5">
+                <div className = "w-full max-w-lg space-y-5">
+                    <h1 className = "text-3xl text-dark-blue font-bold text-center">Add a Creator</h1>
 
                     {error && <div className = "text-red-600">Error: {error}</div>}
 
                     <form onSubmit = {handleSubmit} className = "w-full max-w-xl bg-medium-blue rounded-xl p-5 space-y-5 text-white">
-                        <div className = "space-y-5">
+                        <div>
                             <label>Name:{" "}</label>
                             <input
                                 className = "w-full rounded-xl bg-white text-dark-blue p-5"

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { supabase } from "../client"
-import { useNavigate, useParams, Link } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
+import Header from "../components/Header";
 
 export default function EditCreator() {
     const navigate = useNavigate();
@@ -88,64 +89,74 @@ export default function EditCreator() {
     
     return (
         <div>
-            <Link to = {`/creators/${id}`}>Back</Link>
+            <Header />
 
-            <h1>Edit Creator</h1>
+            <div className = "bg-light-blue min-h-screen flex justify-center items-center p-5">
+                <div className = "w-full max-w-lg space-y-5">
+                    <h1 className = "text-3xl text-dark-blue font-bold text-center">Edit Creator</h1>
 
-            {error && <div>Error: {error}</div>}
+                    {error && <div div className = "text-red-600">Error: {error}</div>}
 
-            <form onSubmit = {handleSubmit}>
-                <div>
-                    <label>Name:</label>
-                    <input
-                        value = {name}
-                        onChange = {(e) => setName(e.target.value)}
-                        required
-                    />
+                    <form onSubmit = {handleSubmit} className = "w-full max-w-xl bg-medium-blue rounded-xl p-5 space-y-5 text-white">
+                        <div>
+                            <label>Name:</label>
+                            <input
+                                className = "w-full rounded-xl bg-white text-dark-blue p-5"
+                                value = {name}
+                                onChange = {(e) => setName(e.target.value)}
+                                required
+                            />
+                        </div>
+
+                        <div>
+                            <label>URL:</label>
+                            <input 
+                                className = "w-full rounded-xl bg-white text-dark-blue p-5"
+                                value = {url}
+                                onChange = {(e) => setUrl(e.target.value)}
+                                required
+                            />
+                        </div>
+
+                        <div>
+                            <label>Description:</label>
+                            <textarea 
+                                className = "w-full rounded-xl bg-white text-dark-blue p-5"
+                                value = {description}
+                                onChange = {(e) => setDescription(e.target.value)}
+                                rows = {3}
+                                required
+                            />
+                        </div>
+                        
+                        <div>
+                            <label>Image URL:</label>
+                            <input 
+                                className = "w-full rounded-xl bg-white text-dark-blue p-5"
+                                value = {imageURL}
+                                onChange = {(e) => setImageURL(e.target.value)}
+                            />
+                        </div>
+
+                        <button
+                            className = "w-full bg-dark-blue text-white rounded-xl px-3 py-1"
+                            type = "submit"
+                            disabled = {saving}
+                        >
+                            {saving ? "Saving..." : "Save changes"}
+                        </button>
+
+                        <button
+                            className = "w-full bg-dark-blue text-white rounded-xl px-3 py-1"
+                            type = "button"
+                            onClick = {handleDelete}
+                            disabled = {saving}
+                        >
+                            Delete creator
+                        </button>
+                    </form>
                 </div>
-
-                <div>
-                    <label>URL:</label>
-                    <input 
-                        value = {url}
-                        onChange = {(e) => setUrl(e.target.value)}
-                        required
-                    />
-                </div>
-
-                <div>
-                    <label>Description:</label>
-                    <textarea 
-                        value = {description}
-                        onChange = {(e) => setDescription(e.target.value)}
-                        rows = {3}
-                        required
-                    />
-                </div>
-                
-                <div>
-                    <label>Image URL:</label>
-                    <input 
-                        value = {imageURL}
-                        onChange = {(e) => setImageURL(e.target.value)}
-                    />
-                </div>
-
-                <button
-                    type = "submit"
-                    disabled = {saving}
-                >
-                    {saving ? "Saving..." : "Save changes"}
-                </button>
-
-                <button
-                    type = "button"
-                    onClick = {handleDelete}
-                    disabled = {saving}
-                >
-                    Delete creator
-                </button>
-            </form>
+            </div>
         </div>
     )
 }
