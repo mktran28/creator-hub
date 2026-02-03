@@ -27,7 +27,7 @@ The following **optional** features are implemented:
 
 Here's a walkthrough of implemented required features:
 
-[Video Walkthrough](https://drive.google.com/file/d/1x3NwugfCLKoCKutQtE7mfvk1AO9gZWwi/view)
+[Video Walkthrough](https://drive.google.com/file/d/1I9O93ocDBiUYNEV9UGaJ5JR7BtRya-FO/view?usp=sharing)
 
 ## License
 
